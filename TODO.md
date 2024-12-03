@@ -67,3 +67,6 @@ Work on getting the base of the program down, I'm assuming all of the other bots
 <br>
 ^ Yes, this is an actual team that has uploaded their code for the High Stakes game, going to be basing a lot of our code off of this, not entirely but a lot.
 Mainly just to understand it.
+
+
+[Path Generator/Visualizer for High Stakes](https://path.jerryio.com/)

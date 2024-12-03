@@ -1,4 +1,5 @@
 #include "main.h"
+#include "pros/motors.h"
 
 /**
  * A callback function for LLEMU's center button.
@@ -24,9 +25,13 @@ void on_center_button() {
  */
 void initialize() {
 	pros::lcd::initialize();
-	pros::lcd::set_text(1, "Hello PROS User!");
+	pros::lcd::set_text(1, "1624A Program(WIP)");
 
-	pros::lcd::register_btn1_cb(on_center_button);
+    LeftMotor.set_brake_mode(pros::E_MOTOR_BRAKE_BRAKE);
+    right_motor.set_brake_mode(pros::E_MOTOR_BRAKE_BRAKE);
+    // ConGP.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
+    Con1.set_brake_mode(pros::E_MOTOR_BRAKE_BRAKE);
+    Con2.set_brake_mode(pros::E_MOTOR_BRAKE_BRAKE);
 }
 
 /**
@@ -46,6 +51,23 @@ void disabled() {}
  * starts.
  */
 void competition_initialize() {}
+
+void RedPos() {
+translate(-500, 100);
+}
+
+void RedNeg() {
+
+}
+
+void BluePos() {
+
+}
+
+void BlueNeg() {
+
+}
+
 
 /**
  * Runs the user autonomous code. This function will be started in its own task
