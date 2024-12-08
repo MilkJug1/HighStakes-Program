@@ -76,7 +76,10 @@ void opcontrol(void);
  * You can add C++-only headers here
  */
 
+#include "pros/apix.h"
+
  #include "subSystemHeaders/drive.hpp"
+#include "subSystemHeaders/screen.hpp"
  #include "subSystemHeaders/globals.hpp"
  #include "subSystemHeaders/hook.hpp"
  #include "subSystemHeaders/intake.hpp"
