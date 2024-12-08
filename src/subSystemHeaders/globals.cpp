@@ -1,6 +1,7 @@
 #include "main.h"
 
 // Motors that are reversed have a negative port number
+int controlScheme = 0;
 
 pros::Motor LeftMotor(19, pros::E_MOTOR_GEARSET_18, true, pros::E_MOTOR_ENCODER_COUNTS);
 
