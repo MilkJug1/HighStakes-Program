@@ -1,4 +1,3 @@
-#include "display/lv_objx/lv_tabview.h"
 #include "globals.hpp"
 #include "main.h"
 
@@ -34,11 +33,18 @@ static lv_res_t AutonSwitcher(lv_obj_t *btn, const char *txt) {
 void screenInit() {
 
   lv_obj_t *tabview;
+
   tabview = lv_tabview_create(lv_scr_act(), NULL);
 
   lv_obj_t *tab1 = lv_tabview_add_tab(tabview, "Auton Select");
   lv_obj_t *tab2 = lv_tabview_add_tab(tabview, "Drive Select");
   lv_obj_t* tab3 = lv_tabview_add_tab(tabview, "Skills Auton");
+
+    static lv_style_t bg_btn_background;
+    bg_btn_background.body.main_color = LV_COLOR_HEX(0x4d0000);
+    bg_btn_background.text.font = &lv_font_dejavu_20;
+
+    lv_tabview_set_style(tabview, LV_TABVIEW_STYLE_BTN_BG, &bg_btn_background);
 
   lv_obj_t *label1 = lv_label_create(tab1, NULL);
   lv_obj_t *label2 = lv_label_create(tab1, NULL);

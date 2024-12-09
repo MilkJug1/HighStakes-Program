@@ -5,8 +5,8 @@
 #include <cstdlib>
 
 void setDrive(int left, int right) {
-    LeftMotor = left;
-    right_motor = right;
+    // LeftMotor = left;
+    // right_motor = right;
 }
 
 void resetDriveEncoders() {

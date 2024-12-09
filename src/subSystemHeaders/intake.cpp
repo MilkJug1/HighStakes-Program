@@ -4,7 +4,7 @@
 
 
 void setIntake(int button) {
-    Hook = button;
+    // Hook = button;
 }
 
 void setIntakeMotors() {

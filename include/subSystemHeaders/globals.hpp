@@ -17,3 +17,10 @@ extern pros::Motor Con2;
 extern pros::MotorGroup ConGP;
 
 extern pros::Controller Controller;
+
+
+// GUI STUFF
+
+// void btnSetToggled(lv_obj_t * btn, bool toggled);
+
+extern int AutonSel;
