@@ -1,6 +1,8 @@
 #include "api.h"
 #include "main.h"
 
+extern int controlScheme;
+
 // Motors
 extern pros::Motor LeftMotor;
 extern pros::Motor right_motor;

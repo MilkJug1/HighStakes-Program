@@ -1,5 +1,4 @@
 #include "main.h"
-#include "pros/motors.h"
 
 /**
  * A callback function for LLEMU's center button.
@@ -8,13 +7,13 @@
  * "I was pressed!" and nothing.
  */
 void on_center_button() {
-	static bool pressed = false;
-	pressed = !pressed;
-	if (pressed) {
-		pros::lcd::set_text(2, "I was pressed!");
-	} else {
-		pros::lcd::clear_line(2);
-	}
+  static bool pressed = false;
+  pressed = !pressed;
+  if (pressed) {
+    pros::lcd::set_text(2, "I was pressed!");
+  } else {
+    pros::lcd::clear_line(2);
+  }
 }
 
 /**
@@ -24,14 +23,12 @@ void on_center_button() {
  * to keep execution time for this mode under a few seconds.
  */
 void initialize() {
-	pros::lcd::initialize();
-	pros::lcd::set_text(1, "1624A Program(WIP)");
-
-    LeftMotor.set_brake_mode(pros::E_MOTOR_BRAKE_BRAKE);
-    right_motor.set_brake_mode(pros::E_MOTOR_BRAKE_BRAKE);
-    // ConGP.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
-    Con1.set_brake_mode(pros::E_MOTOR_BRAKE_BRAKE);
-    Con2.set_brake_mode(pros::E_MOTOR_BRAKE_BRAKE);
+    screenInit();
+  LeftMotor.set_brake_mode(pros::E_MOTOR_BRAKE_BRAKE);
+  right_motor.set_brake_mode(pros::E_MOTOR_BRAKE_BRAKE);
+  // ConGP.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
+  Con1.set_brake_mode(pros::E_MOTOR_BRAKE_BRAKE);
+  Con2.set_brake_mode(pros::E_MOTOR_BRAKE_BRAKE);
 }
 
 /**
@@ -52,22 +49,13 @@ void disabled() {}
  */
 void competition_initialize() {}
 
-void RedPos() {
-translate(-500, 100);
-}
+void RedPos() { translate(-500, 100); }
 
-void RedNeg() {
+void RedNeg() {}
 
-}
+void BluePos() {}
 
-void BluePos() {
-
-}
-
-void BlueNeg() {
-
-}
-
+void BlueNeg() {}
 
 /**
  * Runs the user autonomous code. This function will be started in its own task
@@ -96,23 +84,26 @@ void autonomous() {}
  * task, not resume it from where it left off.
  */
 void opcontrol() {
-	pros::Controller master(pros::E_CONTROLLER_MASTER);
-	pros::Motor left_mtr(1);
-	pros::Motor right_mtr(2);
+  pros::Controller master(pros::E_CONTROLLER_MASTER);
+  pros::Motor left_mtr(1);
+  pros::Motor right_mtr(2);
 
-	while (true) {
-		pros::lcd::print(0, "%d %d %d", (pros::lcd::read_buttons() & LCD_BTN_LEFT) >> 2,
-		                 (pros::lcd::read_buttons() & LCD_BTN_CENTER) >> 1,
-		                 (pros::lcd::read_buttons() & LCD_BTN_RIGHT) >> 0);
-		int left = master.get_analog(ANALOG_LEFT_Y);
-		int right = master.get_analog(ANALOG_RIGHT_Y);
+  while (true) {
+    pros::lcd::print(0, "%d %d %d",
+                     (pros::lcd::read_buttons() & LCD_BTN_LEFT) >> 2,
+                     (pros::lcd::read_buttons() & LCD_BTN_CENTER) >> 1,
+                     (pros::lcd::read_buttons() & LCD_BTN_RIGHT) >> 0);
+    int left = master.get_analog(ANALOG_LEFT_Y);
+    int right = master.get_analog(ANALOG_RIGHT_Y);
 
-		setDriveMotor();
-        setIntakeMotors();
+    setDriveMotor();
+    setIntakeMotors();
 
-		left_mtr = left;
-		right_mtr = right;
+    left_mtr = left;
+    right_mtr = right;
+    
 
-		pros::delay(20);
-	}
+    pros::delay(20);
+
+  }
 }
