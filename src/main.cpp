@@ -24,11 +24,11 @@ void on_center_button() {
  */
 void initialize() {
     screenInit();
-  LeftMotor.set_brake_mode(pros::E_MOTOR_BRAKE_BRAKE);
-  right_motor.set_brake_mode(pros::E_MOTOR_BRAKE_BRAKE);
-  // ConGP.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
-  Con1.set_brake_mode(pros::E_MOTOR_BRAKE_BRAKE);
-  Con2.set_brake_mode(pros::E_MOTOR_BRAKE_BRAKE);
+  // LeftMotor.set_brake_mode(pros::E_MOTOR_BRAKE_BRAKE);
+  // right_motor.set_brake_mode(pros::E_MOTOR_BRAKE_BRAKE);
+  // // ConGP.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
+  // Con1.set_brake_mode(pros::E_MOTOR_BRAKE_BRAKE);
+  // Con2.set_brake_mode(pros::E_MOTOR_BRAKE_BRAKE);
 }
 
 /**
@@ -85,9 +85,9 @@ void autonomous() {}
  */
 void opcontrol() {
   pros::Controller master(pros::E_CONTROLLER_MASTER);
-  pros::Motor left_mtr(1);
-  pros::Motor right_mtr(2);
-
+  // pros::Motor left_mtr(1);
+  // pros::Motor right_mtr(2);
+ //
   while (true) {
     pros::lcd::print(0, "%d %d %d",
                      (pros::lcd::read_buttons() & LCD_BTN_LEFT) >> 2,
@@ -99,8 +99,8 @@ void opcontrol() {
     setDriveMotor();
     setIntakeMotors();
 
-    left_mtr = left;
-    right_mtr = right;
+    // left_mtr = left;
+    // right_mtr = right;
     
 
     pros::delay(20);

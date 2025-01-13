@@ -1,4 +1,3 @@
-#include "display/lv_misc/lv_area.h"
 #include "main.h"
 
 // Motors that are reversed have a negative port number
