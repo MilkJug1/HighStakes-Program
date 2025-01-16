@@ -1,8 +1,12 @@
 #include "globals.hpp"
+#include "liblvgl/core/lv_event.h"
 #include "liblvgl/core/lv_obj_style.h"
 #include "liblvgl/lvgl.h"
 #include "liblvgl/misc/lv_color.h"
+#include "liblvgl/widgets/lv_btnmatrix.h"
 #include "main.h"
+#include <cstddef>
+#include <cstdint>
 
 // TODO: Style it with the School colors and make it a bit nicer to look at.
 // TODO: find a way to handle control switching, maybe a variable that we can
@@ -31,6 +35,17 @@ static void AutonSwitcher(lv_obj_t *btn, const char *txt) {
   // TODO: implement functionality for auton switcher
   printf("Implement this for button :%s\n", txt);
 
+}
+
+static void event_handler(lv_event_t *e) {
+    lv_event_code_t code = lv_event_get_code(e);
+    lv_obj_t* obj = lv_event_get_target(e);
+    if(code == LV_EVENT_VALUE_CHANGED) {
+         uint32_t id = lv_btnmatrix_get_selected_btn(obj);
+        const char * txt = lv_btnmatrix_get_btn_text(obj, id);
+        LV_UNUSED(txt);
+        printf("%s was pressed\n", txt);
+    }
 }
 
 void screenInit() {
@@ -62,7 +77,7 @@ void screenInit() {
 
   lv_btnmatrix_set_map(switcherBtns, btnm_map);
 
-  // lv_obj_add_event_cb(switcherBtns, AutonSwitcher);
+  lv_obj_add_event_cb(switcherBtns, event_handler, LV_EVENT_ALL, NULL);
 
   lv_obj_set_size(switcherBtns, LV_HOR_RES, LV_VER_RES / 2);
 
