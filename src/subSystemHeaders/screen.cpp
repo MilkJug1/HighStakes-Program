@@ -31,42 +31,14 @@
 //
 
 // This will be moved into another file, just here for testing purposes.
-typedef enum {
-  BLUE_POS,
-  BLUE_NEG,
-  RED_POS,
-  RED_NEG,
-} auton_state_t;
-
 // TODO: Handle Auton in seperate file
 static void event_handler(lv_event_t *e) {
   lv_obj_t *obj = lv_event_get_target(e); 
-  auton_state_t auton; // Temp
   uint32_t id = lv_btnmatrix_get_selected_btn(obj); // We create a variable of the index of which button has been selected, since its an array
   printf("Button %d is %s\n", id, (lv_btnmatrix_has_btn_ctrl(obj, id,
   LV_BTNMATRIX_CTRL_CHECKED) ? "selected" : "not selected")); // See which button has been checked with the "lv_matrix_get_selected_btn()"
     // This switch case is how we are going to handle dealing with the selecting of different Autons.
 
-  switch (id)  {
-
-  case 0:
-    auton = BLUE_POS;
-    printf("Switched to Blue Pos Auton\n");
-    break;
-  case 1:
-    auton = BLUE_NEG;
-    printf("Switched to Blue Neg Auton\n");
-    break;
-  case 2:
-    auton = RED_POS;
-    printf("Switched to Red Pos Auton\n");
-    break;
-
-  case 3:
-    auton = RED_NEG;
-    printf("Switched to Red Neg Auton\n");
-    break;
-  }
 }
 
 void screenInit() {
