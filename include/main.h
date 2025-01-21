@@ -84,6 +84,7 @@ void opcontrol(void);
  #include "subSystemHeaders/hook.hpp"
  #include "subSystemHeaders/intake.hpp"
  #include "subSystemHeaders/lift.hpp"
+ #include "subSystemHeaders/auton.hpp"
 //#include <iostream>
 #endif
 
