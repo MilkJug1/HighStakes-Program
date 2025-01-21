@@ -1,9 +1,5 @@
 #include "globals.hpp"
-#include "liblvgl/core/lv_event.h"
-#include "liblvgl/core/lv_obj_style.h"
 #include "liblvgl/lvgl.h"
-#include "liblvgl/misc/lv_color.h"
-#include "liblvgl/widgets/lv_btnmatrix.h"
 #include "main.h"
 #include <cstddef>
 #include <cstdint>
@@ -13,6 +9,9 @@
 // look at that would be used to dictate which control style we use?
 // TODO: Figuring out one wants to do the Driver control tab
 // NOTE: Maybe we could implement another screen for skills?
+// NOTE: Been a while since I've dealt with OOP in C++, Im a bit used to Rust,
+// Zig, and C at the moment, but classes may or may not help me out right now
+//
 //
 // static void btnSwitcher(lv_event_t *btn) {
 //
@@ -31,63 +30,97 @@
 // }
 //
 
-static void AutonSwitcher(lv_obj_t *btn, const char *txt) {
-  // TODO: implement functionality for auton switcher
-  printf("Implement this for button :%s\n", txt);
+// This will be moved into another file, just here for testing purposes.
+typedef enum {
+  BLUE_POS,
+  BLUE_NEG,
+  RED_POS,
+  RED_NEG,
+} auton_state_t;
 
-}
-
+// TODO: Handle Auton in seperate file
 static void event_handler(lv_event_t *e) {
-    lv_event_code_t code = lv_event_get_code(e);
-    lv_obj_t* obj = lv_event_get_target(e);
-    if(code == LV_EVENT_VALUE_CHANGED) {
-         uint32_t id = lv_btnmatrix_get_selected_btn(obj);
-        const char * txt = lv_btnmatrix_get_btn_text(obj, id);
-        LV_UNUSED(txt);
-        printf("%s was pressed\n", txt);
-    }
+  lv_obj_t *obj = lv_event_get_target(e); 
+  auton_state_t auton; // Temp
+  uint32_t id = lv_btnmatrix_get_selected_btn(obj); // We create a variable of the index of which button has been selected, since its an array
+  printf("Button %d is %s\n", id, (lv_btnmatrix_has_btn_ctrl(obj, id,
+  LV_BTNMATRIX_CTRL_CHECKED) ? "selected" : "not selected")); // See which button has been checked with the "lv_matrix_get_selected_btn()"
+    // This switch case is how we are going to handle dealing with the selecting of different Autons.
+
+  switch (id)  {
+
+  case 0:
+    auton = BLUE_POS;
+    printf("Switched to Blue Pos Auton\n");
+    break;
+  case 1:
+    auton = BLUE_NEG;
+    printf("Switched to Blue Neg Auton\n");
+    break;
+  case 2:
+    auton = RED_POS;
+    printf("Switched to Red Pos Auton\n");
+    break;
+
+  case 3:
+    auton = RED_NEG;
+    printf("Switched to Red Neg Auton\n");
+    break;
+  }
 }
 
 void screenInit() {
 
   lv_obj_t *tabview;
 
-    tabview = lv_tabview_create(lv_scr_act(), 1, 100);
+  tabview = lv_tabview_create(lv_scr_act(), 1, 100);
 
   lv_obj_t *tab1 = lv_tabview_add_tab(tabview, "Auton Select");
   lv_obj_t *tab2 = lv_tabview_add_tab(tabview, "Drive Select");
-  lv_obj_t* tab3 = lv_tabview_add_tab(tabview, "Skills Auton");
+  lv_obj_t *tab3 = lv_tabview_add_tab(tabview, "Skills Auton");
 
-    static lv_style_t bg_btn_background;
-    // lv_tabview_set_style(tabview, LV_TABVIEW_STYLE_BTN_BG, &bg_btn_background);
+  static lv_style_t bg_btn_background;
+  // lv_tabview_set_style(tabview, LV_TABVIEW_STYLE_BTN_BG, &bg_btn_background);
 
   lv_obj_t *label1 = lv_label_create(tab1);
   lv_obj_t *label2 = lv_label_create(tab1);
 
-    lv_obj_t *autonName = lv_label_create(tab1);
+  lv_obj_t *autonName = lv_label_create(tab1);
 
   // lv_obj_t *autonName = lv_label_create(tab1, NULL);
-  lv_obj_align(label1,  LV_ALIGN_RIGHT_MID, 0, 10);
-  lv_obj_align(label2,  LV_ALIGN_LEFT_MID, 0, 0);
+  lv_obj_align(label1, LV_ALIGN_RIGHT_MID, 0, 10);
+  lv_obj_align(label2, LV_ALIGN_LEFT_MID, 0, 0);
   // lv_obj_align(autonName, NULL, LV_ALIGN_OUT_BOTTOM_MID, 0, 0);
   //
   //
-  static const char *btnm_map[] = {"btn1", "btn2", "btn3", "btn4", ""};
+  static const char *btnm_map[] = {"btn1", "btn2", "\n", "btn3", "btn4", ""};
   lv_obj_t *switcherBtns = lv_btnmatrix_create(tab1);
 
   lv_btnmatrix_set_map(switcherBtns, btnm_map);
 
-  lv_obj_add_event_cb(switcherBtns, event_handler, LV_EVENT_ALL, NULL);
+  lv_obj_add_event_cb(switcherBtns, event_handler, LV_EVENT_VALUE_CHANGED,
+                      NULL);
 
   lv_obj_set_size(switcherBtns, LV_HOR_RES, LV_VER_RES / 2);
+  lv_btnmatrix_set_btn_ctrl_all(switcherBtns, LV_BTNMATRIX_CTRL_CHECKABLE);
 
-    lv_label_set_text(autonName, "Test");
-    lv_obj_set_y(autonName, -10);
+  // lv_btnmatrix_set_btn_ctrl(switcherBtns,  0,  LV_BTNMATRIX_CTRL_CHECKABLE);
+  // lv_btnmatrix_set_btn_ctrl(switcherBtns,  1,  LV_BTNMATRIX_CTRL_CHECKABLE);
+  // lv_btnmatrix_set_btn_ctrl(switcherBtns,  2,  LV_BTNMATRIX_CTRL_CHECKABLE);
+  // lv_btnmatrix_set_btn_ctrl(switcherBtns,  3,  LV_BTNMATRIX_CTRL_CHECKABLE);
 
-    lv_obj_align(autonName, LV_ALIGN_BOTTOM_MID, 0, 0);
+  lv_btnmatrix_set_one_checked(switcherBtns, true);
+  // lv_btnmatrix_set_btn_ctrl(switcherBtns, 1, LV_BTNMATRIX_CTRL_CHECKED);
+  lv_obj_center(switcherBtns);
+
+  lv_label_set_text(autonName, "Test");
+  lv_obj_set_y(autonName, -10);
+
+  lv_obj_align(autonName, LV_ALIGN_BOTTOM_MID, 0, 0);
   static lv_style_t style_bg;
-    lv_style_init(&style_bg);
-    lv_style_set_bg_color(&style_bg, lv_color_hex(0xa03060));
+
+  lv_style_init(&style_bg);
+  lv_style_set_bg_color(&style_bg, lv_color_hex(0xa03060));
   // lv_style_copy(&style_bg, &lv_style_plain);
   // style_bg.body.main_color = LV_COLOR_SILVER;
   // style_bg.body.grad_color = LV_COLOR_SILVER;
@@ -96,7 +129,7 @@ void screenInit() {
   // style_bg.body.padding.inner = 0;
   //
   // style_bg.text.color = LV_COLOR_WHITE;
-    lv_obj_set_style_bg_color(tabview, lv_palette_main(LV_PALETTE_GREY), 0);
+  lv_obj_set_style_bg_color(tabview, lv_palette_main(LV_PALETTE_GREY), 0);
   /*Create 2 button styles*/
   static lv_style_t style_btn_rel;
   static lv_style_t style_btn_pr;
@@ -135,6 +168,6 @@ void screenInit() {
   lv_obj_align(controlTank, LV_ALIGN_RIGHT_MID, 0, 0);
 
   // lv_obj_t *switchControl = lv_sw_create(tab2, NULL);
-    lv_obj_t *switchControl = lv_switch_create(tab2);
+  lv_obj_t *switchControl = lv_switch_create(tab2);
   lv_obj_align(switchControl, LV_ALIGN_CENTER, 0, 0);
 }
