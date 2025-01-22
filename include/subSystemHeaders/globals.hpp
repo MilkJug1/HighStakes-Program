@@ -3,7 +3,12 @@
 
 extern int controlScheme;
 
-// Motors
+// enum class AutonState {
+//     RED_POS,
+//     RED_NEG,
+//     BLUE_POS,
+//     BLUE_NEG,
+// };// Motors
 extern pros::Motor LeftMotor;
 extern pros::Motor right_motor;
 
