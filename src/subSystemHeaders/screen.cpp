@@ -75,7 +75,7 @@ void screenInit() {
 
   lv_obj_t *tabview;
 
-  tabview = lv_tabview_create(lv_scr_act(), 1, 100);
+  tabview = lv_tabview_create(lv_scr_act(), LV_DIR_TOP, 35);
 
   lv_obj_t *tab1 = lv_tabview_add_tab(tabview, "Auton Select");
   lv_obj_t *tab2 = lv_tabview_add_tab(tabview, "Drive Select");
@@ -122,7 +122,7 @@ void screenInit() {
   static lv_style_t style_bg;
 
   lv_style_init(&style_bg);
-  lv_style_set_bg_color(&style_bg, lv_color_hex(0xa03060));
+  // lv_style_set_bg_color(&style_bg, lv_color_hex(0xa03060));
   // lv_style_copy(&style_bg, &lv_style_plain);
   // style_bg.body.main_color = LV_COLOR_SILVER;
   // style_bg.body.grad_color = LV_COLOR_SILVER;
@@ -131,7 +131,7 @@ void screenInit() {
   // style_bg.body.padding.inner = 0;
   //
   // style_bg.text.color = LV_COLOR_WHITE;
-  lv_obj_set_style_bg_color(tabview, lv_palette_main(LV_PALETTE_GREY), 0);
+  // lv_obj_set_style_bg_color(tabview, lv_palette_main(LV_PALETTE_GREY), 0);
   /*Create 2 button styles*/
   static lv_style_t style_btn_rel;
   static lv_style_t style_btn_pr;
