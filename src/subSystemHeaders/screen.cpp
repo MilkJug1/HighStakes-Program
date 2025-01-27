@@ -1,4 +1,3 @@
-#include "globals.hpp"
 #include "liblvgl/lvgl.h"
 #include "main.h"
 #include <cstddef>
