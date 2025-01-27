@@ -38,6 +38,33 @@ static void event_handler(lv_event_t *e) {
   LV_BTNMATRIX_CTRL_CHECKED) ? "selected" : "not selected")); // See which button has been checked with the "lv_matrix_get_selected_btn()"
     // This switch case is how we are going to handle dealing with the selecting of different Autons.
 
+  lv_obj_t *obj = lv_event_get_target(e);
+  uint32_t id = lv_btnmatrix_get_selected_btn(
+      obj); // We create a variable of the index of which button has been
+            // selected, since its an array
+  // printf("Button %d is %s\n", id, (lv_btnmatrix_has_btn_ctrl(obj, id,
+  // LV_BTNMATRIX_CTRL_CHECKED) ? "selected" : "not selected")); // See which
+  // button has been checked with the "lv_matrix_get_selected_btn()" This switch
+  // case is how we are going to handle dealing with the selecting of different
+  // Autons.
+  switch (lv_btnmatrix_get_selected_btn(obj)) {
+  case 0:
+    auton = AutonType::BLUE_POS;
+    printf("Blue Pos set\n");
+    break;
+  case 1:
+    auton = AutonType::BLUE_NEG;
+    printf("Blue Neg Set\n");
+    break;
+  case 2:
+    auton = AutonType::RED_POS;
+    printf("Red Pos set\n");
+    break;
+  case 3:
+    auton = AutonType::RED_NEG;
+    printf("Red Neg set\n");
+    break;
+  }
 }
 
 void screenInit() {
