@@ -42,3 +42,13 @@ What the program *plans* to feature
 - Test Cases
 - A sensible plan (:\)
 - And more I can't remember at this current moment, will be restructing everything again
+
+
+## How to Install
+
+Included is a udev rules file for all my Linux people who want to compile this, it has a rule set for any ttyACM* device to give it 666 for permissions, got tired of trying to run the command every time I had to plug it in.
+
+Next, after downloading this, make sure you have pros and do this:
+```sh 
+pros mu
+```
