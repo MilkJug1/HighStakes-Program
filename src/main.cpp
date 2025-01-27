@@ -49,13 +49,7 @@ void disabled() {}
  */
 void competition_initialize() {}
 
-void RedPos() { translate(-500, 100); }
 
-void RedNeg() {}
-
-void BluePos() {}
-
-void BlueNeg() {}
 
 /**
  * Runs the user autonomous code. This function will be started in its own task
@@ -98,8 +92,7 @@ void opcontrol() {
 
     setDriveMotor();
     setIntakeMotors();
-
-    // left_mtr = left;
+     // left_mtr = left;
     // right_mtr = right;
     
 
