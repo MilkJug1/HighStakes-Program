@@ -32,13 +32,11 @@
 // This will be moved into another file, just here for testing purposes.
 // TODO: Handle Auton in seperate file
 static void event_handler(lv_event_t *e) {
-  lv_obj_t *obj = lv_event_get_target(e); 
-  uint32_t id = lv_btnmatrix_get_selected_btn(obj); // We create a variable of the index of which button has been selected, since its an array
-  printf("Button %d is %s\n", id, (lv_btnmatrix_has_btn_ctrl(obj, id,
-  LV_BTNMATRIX_CTRL_CHECKED) ? "selected" : "not selected")); // See which button has been checked with the "lv_matrix_get_selected_btn()"
-    // This switch case is how we are going to handle dealing with the selecting of different Autons.
-
   lv_obj_t *obj = lv_event_get_target(e);
+lv_obj_t *tabview = lv_obj_get_parent(obj);
+  // lv_obj_t *tab1 = lv_obj_get_child(tabview, 0);
+  lv_obj_t *AutonTextName = lv_obj_get_child(tabview, 2);
+  // lv_obj_t *AutonTextName = lv_obj_get_child(tab1, 5);
   uint32_t id = lv_btnmatrix_get_selected_btn(
       obj); // We create a variable of the index of which button has been
             // selected, since its an array
@@ -47,22 +45,28 @@ static void event_handler(lv_event_t *e) {
   // button has been checked with the "lv_matrix_get_selected_btn()" This switch
   // case is how we are going to handle dealing with the selecting of different
   // Autons.
+
+ 
   switch (lv_btnmatrix_get_selected_btn(obj)) {
   case 0:
     auton = AutonType::BLUE_POS;
     printf("Blue Pos set\n");
+    lv_label_set_text(AutonTextName, "Currently Selected: Blue Pos");
     break;
   case 1:
     auton = AutonType::BLUE_NEG;
     printf("Blue Neg Set\n");
+    lv_label_set_text(AutonTextName, "Currently Selected: Blue Neg");
     break;
   case 2:
     auton = AutonType::RED_POS;
     printf("Red Pos set\n");
+    lv_label_set_text(AutonTextName, "Currently Selected: Red Pos");
     break;
   case 3:
     auton = AutonType::RED_NEG;
     printf("Red Neg set\n");
+    lv_label_set_text(AutonTextName, "Currently Selected: Red Neg");
     break;
   }
 }
@@ -91,7 +95,7 @@ void screenInit() {
   // lv_obj_align(autonName, NULL, LV_ALIGN_OUT_BOTTOM_MID, 0, 0);
   //
   //
-  static const char *btnm_map[] = {"btn1", "btn2", "\n", "btn3", "btn4", ""};
+  static const char *btnm_map[] = {"Blue Pos", "Blue Neg", "\n", "Red Pos", "Red Neg", ""};
   lv_obj_t *switcherBtns = lv_btnmatrix_create(tab1);
 
   lv_btnmatrix_set_map(switcherBtns, btnm_map);
