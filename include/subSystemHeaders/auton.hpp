@@ -1,14 +1,8 @@
 #include "main.h"
 
-// This will be moved into another file, just here for testing purposes.
-enum class AutonType {
-    BLUE_POS,
-    BLUE_NEG,
-    RED_POS,
-    RED_NEG,
-};
+void RedPos();
+void RedNeg();
 
-extern const AutonType& get_auton_type();
+void BluePos();
 
-
-int AutonSelector(AutonState auton);
+void BlueNeg();
