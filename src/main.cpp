@@ -90,6 +90,21 @@ void opcontrol() {
     int left = master.get_analog(ANALOG_LEFT_Y);
     int right = master.get_analog(ANALOG_RIGHT_Y);
 
+        switch (auton) {
+            case AutonType::RED_NEG:
+                printf("Test for Red Neg\n");
+            break;
+            case AutonType::RED_POS:
+                printf("Test for Red Pos\n");
+            break;
+            case AutonType::BLUE_NEG:
+                printf("test for Blue Neg\n");
+            break;
+            case AutonType::BLUE_POS:
+                printf("Test for Blue Pos\n");
+            break;
+        }
+
     setDriveMotor();
     setIntakeMotors();
      // left_mtr = left;
