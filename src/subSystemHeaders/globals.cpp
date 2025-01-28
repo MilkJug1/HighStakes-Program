@@ -2,9 +2,9 @@
 
 // Motors that are reversed have a negative port number
 //
-int controlScheme = 0;
 
 AutonType auton;
+ControlType controlStyle;
 
 // AutonType auton = AutonType::BLUE_NEG;
 
@@ -34,8 +34,3 @@ AutonType auton;
 // MISC
 
 // Hook Pos
-
-// void btnSetToggled(lv_obj_t *btn, bool toggled)
-// {
-//     if (toggled != (lv_btn_get_state(btn) >= 2)) lv_btn_toggle(btn);
-// }

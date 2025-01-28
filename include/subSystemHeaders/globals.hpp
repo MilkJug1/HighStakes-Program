@@ -1,6 +1,6 @@
 #include "main.h"
 
-
+// AutonType, an enum that has each auton state, we uuse this to check what button has changed Auton too.
 enum AutonType {
     BLUE_POS,
     BLUE_NEG,
@@ -8,7 +8,15 @@ enum AutonType {
     RED_NEG,
 };
 
+// We are going to use the same system that I built for the auton switcher and modify it for the control.
+
+enum ControlType {
+    TankStyle,
+    ArcadeStyle,
+};
+
 extern AutonType auton;
+extern ControlType controlStyle;
 
 
 extern pros::Motor LeftMotor;

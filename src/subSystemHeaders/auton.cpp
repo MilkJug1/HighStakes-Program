@@ -1,13 +1,26 @@
 #include "main.h"
 
-// get the state of the AutonType Enum, return a number or the enum 
-// int returnAutonType(AutonType& autonType) {
+//TODO: Start working on ideas for the other Auton states
+// Autons Needing worked on
+// - Blue Neg
+// - Red Pos
+// - Red Neg
 //
-// }
-//
-//
+//NOTE: YOU WILL HAVE TO WORK ON THIS LATER AFTER WE FINISH GETTING THE BOT TO DRIVE, WE WILL BE USING FUNCTIONS FROM THE DRIVE.CPP FILES
 
 
+void RedPos(){
 
+}
 
+void RedNeg() {
 
+}
+
+void BlueNeg() {
+
+}
+
+void BluePos() {
+
+}

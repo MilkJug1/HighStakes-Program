@@ -1,5 +1,7 @@
 #include "main.h"
 
+void controlSwitcher(ControlType cont);
+
 void setDrive();
 
 void setDriveMotor();

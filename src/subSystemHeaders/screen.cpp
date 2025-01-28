@@ -4,38 +4,15 @@
 #include <cstdint>
 
 // TODO: Style it with the School colors and make it a bit nicer to look at.
-// TODO: find a way to handle control switching, maybe a variable that we can
-// look at that would be used to dictate which control style we use?
 // TODO: Figuring out one wants to do the Driver control tab
-// NOTE: Maybe we could implement another screen for skills?
-// NOTE: Been a while since I've dealt with OOP in C++, Im a bit used to Rust,
-// Zig, and C at the moment, but classes may or may not help me out right now
-//
-//
-// static void btnSwitcher(lv_event_t *btn) {
-//
-//   uint8_t id = lv_obj_get_free_num(btn);
-//
-//   if (id == 1)
-//     printf("Switched to Arcade Control\n Please Implement this!\n");
-//   controlScheme = 1;
-//   printf("%i\n)", controlScheme);
-//   if (id == 0)
-//     printf("Switched toTank Control\n Please Implement this!\n");
-//   controlScheme = 0;
-//   printf("%i\n", controlScheme);
-//
-//   return LV_RES_OK;
-// }
-//
 
-// This will be moved into another file, just here for testing purposes.
+
 // TODO: Handle Auton in seperate file
 static void event_handler(lv_event_t *e) {
   lv_obj_t *obj = lv_event_get_target(e);
-lv_obj_t *tabview = lv_obj_get_parent(obj);
+lv_obj_t *tabview = lv_obj_get_parent(obj); // Get the screen
   // lv_obj_t *tab1 = lv_obj_get_child(tabview, 0);
-  lv_obj_t *AutonTextName = lv_obj_get_child(tabview, 2);
+  lv_obj_t *AutonTextName = lv_obj_get_child(tabview, 2); // get the AutonLabel to allow to change the text.
   // lv_obj_t *AutonTextName = lv_obj_get_child(tab1, 5);
   uint32_t id = lv_btnmatrix_get_selected_btn(
       obj); // We create a variable of the index of which button has been
