@@ -18,7 +18,7 @@ pros::Controller Controller(pros::E_CONTROLLER_MASTER);
 pros::MotorGroup
     LeftMotor({10}); // Even tho we have only 1 motor on each side, a 2
                      // drivetrain, i have to declare this as a motor group :/
-pros::MotorGroup right_motor({19});
+pros::MotorGroup right_motor({-19});
 
 // TODO: Change Track width measurements
 lemlib::Drivetrain drivetrain(&LeftMotor, &right_motor, 10,

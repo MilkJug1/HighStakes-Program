@@ -1,20 +1,5 @@
 #include "main.h"
-
-/**
- * A callback function for LLEMU's center button.
- *
- * When this callback is fired, it will toggle line 2 of the LCD text between
- * "I was pressed!" and nothing.
- */
-void on_center_button() {
-  static bool pressed = false;
-  pressed = !pressed;
-  if (pressed) {
-    pros::lcd::set_text(2, "I was pressed!");
-  } else {
-    pros::lcd::clear_line(2);
-  }
-}
+#include "lemlib/api.hpp"
 
 /**
  * Runs initialization code. This occurs as soon as the program is started.
@@ -26,12 +11,6 @@ void initialize() {
   screenInit();
   chassis.calibrate();
 
-  while (true) {
-    printf("X: %f", chassis.getPose().x);
-    printf("Y: %f", chassis.getPose().y);
-    printf("Theta: %f", chassis.getPose().theta);
-    pros::delay(20);
-  }
   // LeftMotor.set_brake_mode(pros::E_MOTOR_BRAKE_BRAKE);
   // right_motor.set_brake_mode(pros::E_MOTOR_BRAKE_BRAKE);
   // // ConGP.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
@@ -55,7 +34,7 @@ void disabled() {}
  * This task will exit when the robot is enabled and autonomous or opcontrol
  * starts.
  */
-void competition_initialize() {}
+void competition_initialize() { screenInit(); }
 
 /**
  * Runs the user autonomous code. This function will be started in its own task
@@ -68,7 +47,23 @@ void competition_initialize() {}
  * will be stopped. Re-enabling the robot will restart the task, not re-start it
  * from where it left off.
  */
-void autonomous() {}
+void autonomous() {
+
+  switch (auton) {
+  case AutonType::RED_NEG:
+    printf("Test for Red Neg\n");
+    break;
+  case AutonType::RED_POS:
+    printf("Test for Red Pos\n");
+    break;
+  case AutonType::BLUE_NEG:
+    printf("test for Blue Neg\n");
+    break;
+  case AutonType::BLUE_POS:
+    printf("Test for Blue Pos\n");
+    break;
+  }
+}
 
 /**
  * Runs the operator control code. This function will be started in its own task
@@ -89,40 +84,30 @@ void opcontrol() {
   // pros::Motor right_mtr(2);
   //
   while (true) {
-    
-        // TODO: Get the correct configuration of the bots 
-        int leftY = Controller.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y);
-        int rightY = Controller.get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_Y);
 
-        // get left y and right x positions
-        // int leftY = controller.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y);
-        // int leftX = controller.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_X);
-        //
-        // // move the robot
-        // chassis.curvature(leftY, leftX);
+    // TODO: Get the correct configuration of the bots
+    int leftY = Controller.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y);
+    int rightY = Controller.get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_Y);
 
-        chassis.tank(leftY, rightY);
+    // get left y and right x positions
+    // int leftY = controller.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y);
+    // int leftX = controller.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_X);
+    //
+    // // move the robot
+    // chassis.curvature(leftY, leftX);
+
+
+      printf("X: %f\n", chassis.getPose().x);
+      printf("Y: %f\n", chassis.getPose().y);
+      printf("Theta: %f\n", chassis.getPose().theta);
+
+    chassis.tank(leftY, rightY);
     pros::lcd::print(0, "%d %d %d",
                      (pros::lcd::read_buttons() & LCD_BTN_LEFT) >> 2,
                      (pros::lcd::read_buttons() & LCD_BTN_CENTER) >> 1,
                      (pros::lcd::read_buttons() & LCD_BTN_RIGHT) >> 0);
     int left = master.get_analog(ANALOG_LEFT_Y);
     int right = master.get_analog(ANALOG_RIGHT_Y);
-
-    switch (auton) {
-    case AutonType::RED_NEG:
-      printf("Test for Red Neg\n");
-      break;
-    case AutonType::RED_POS:
-      printf("Test for Red Pos\n");
-      break;
-    case AutonType::BLUE_NEG:
-      printf("test for Blue Neg\n");
-      break;
-    case AutonType::BLUE_POS:
-      printf("Test for Blue Pos\n");
-      break;
-    }
 
     setDriveMotor();
     setIntakeMotors();
