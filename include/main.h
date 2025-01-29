@@ -76,7 +76,7 @@ void opcontrol(void);
  * You can add C++-only headers here
  */
 
-#include "pros/apix.h"
+#include "pros/apix.h"  
 
 #include "subSystemHeaders/auton.hpp"
 #include "subSystemHeaders/drive.hpp"
@@ -85,6 +85,7 @@ void opcontrol(void);
 #include "subSystemHeaders/intake.hpp"
 #include "subSystemHeaders/lift.hpp"
 #include "subSystemHeaders/screen.hpp"
+#include "lemlib/api.hpp"  // IWYU pragma: keep
 // #include <iostream>
 #endif
 
