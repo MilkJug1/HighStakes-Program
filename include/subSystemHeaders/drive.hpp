@@ -1,6 +1,6 @@
 #include "main.h"
 
-void controlSwitcher(ControlType cont);
+// void controlSwitcher(ControlType cont);
 
 void setDrive();
 

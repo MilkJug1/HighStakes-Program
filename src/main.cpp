@@ -23,7 +23,15 @@ void on_center_button() {
  * to keep execution time for this mode under a few seconds.
  */
 void initialize() {
-    screenInit();
+  screenInit();
+  chassis.calibrate();
+
+  while (true) {
+    printf("X: %f", chassis.getPose().x);
+    printf("Y: %f", chassis.getPose().y);
+    printf("Theta: %f", chassis.getPose().theta);
+    pros::delay(20);
+  }
   // LeftMotor.set_brake_mode(pros::E_MOTOR_BRAKE_BRAKE);
   // right_motor.set_brake_mode(pros::E_MOTOR_BRAKE_BRAKE);
   // // ConGP.set_brake_mode(pros::E_MOTOR_BRAKE_COAST);
@@ -48,8 +56,6 @@ void disabled() {}
  * starts.
  */
 void competition_initialize() {}
-
-
 
 /**
  * Runs the user autonomous code. This function will be started in its own task
@@ -81,8 +87,21 @@ void opcontrol() {
   pros::Controller master(pros::E_CONTROLLER_MASTER);
   // pros::Motor left_mtr(1);
   // pros::Motor right_mtr(2);
- //
+  //
   while (true) {
+    
+        // TODO: Get the correct configuration of the bots 
+        int leftY = Controller.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y);
+        int rightY = Controller.get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_Y);
+
+        // get left y and right x positions
+        // int leftY = controller.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y);
+        // int leftX = controller.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_X);
+        //
+        // // move the robot
+        // chassis.curvature(leftY, leftX);
+
+        chassis.tank(leftY, rightY);
     pros::lcd::print(0, "%d %d %d",
                      (pros::lcd::read_buttons() & LCD_BTN_LEFT) >> 2,
                      (pros::lcd::read_buttons() & LCD_BTN_CENTER) >> 1,
@@ -90,28 +109,26 @@ void opcontrol() {
     int left = master.get_analog(ANALOG_LEFT_Y);
     int right = master.get_analog(ANALOG_RIGHT_Y);
 
-        switch (auton) {
-            case AutonType::RED_NEG:
-                printf("Test for Red Neg\n");
-            break;
-            case AutonType::RED_POS:
-                printf("Test for Red Pos\n");
-            break;
-            case AutonType::BLUE_NEG:
-                printf("test for Blue Neg\n");
-            break;
-            case AutonType::BLUE_POS:
-                printf("Test for Blue Pos\n");
-            break;
-        }
+    switch (auton) {
+    case AutonType::RED_NEG:
+      printf("Test for Red Neg\n");
+      break;
+    case AutonType::RED_POS:
+      printf("Test for Red Pos\n");
+      break;
+    case AutonType::BLUE_NEG:
+      printf("test for Blue Neg\n");
+      break;
+    case AutonType::BLUE_POS:
+      printf("Test for Blue Pos\n");
+      break;
+    }
 
     setDriveMotor();
     setIntakeMotors();
-     // left_mtr = left;
+    // left_mtr = left;
     // right_mtr = right;
-    
 
     pros::delay(20);
-
   }
 }
