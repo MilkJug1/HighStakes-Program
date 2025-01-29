@@ -1,4 +1,5 @@
 #include "main.h"
+#include "lemlib/api.hpp"
 
 // AutonType, an enum that has each auton state, we uuse this to check what button has changed Auton too.
 enum AutonType {
@@ -18,9 +19,14 @@ enum ControlType {
 extern AutonType auton;
 extern ControlType controlStyle;
 
+extern lemlib::Drivetrain drivetrain;
+extern lemlib::ControllerSettings lateral_controller;
+extern lemlib::ControllerSettings angular_controller;
+extern lemlib::Chassis chassis;
 
-extern pros::Motor LeftMotor;
-extern pros::Motor right_motor;
+
+extern pros::MotorGroup LeftMotor;
+extern pros::MotorGroup right_motor;
 
 //Hook
 extern pros::Motor Hook;
