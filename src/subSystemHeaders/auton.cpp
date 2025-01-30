@@ -6,21 +6,30 @@
 // - Red Pos
 // - Red Neg
 //
-//NOTE: YOU WILL HAVE TO WORK ON THIS LATER AFTER WE FINISH GETTING THE BOT TO DRIVE, WE WILL BE USING FUNCTIONS FROM THE DRIVE.CPP FILES
+//TODO: Port the Python code for the auton, then work on the others.
+//NOTE: Got bot working driving, now time for auton, so happy right now
+//
 
 
 void RedPos(){
+    chassis.moveToPose(10, 10, 90, 1000);
 
 }
 
 void RedNeg() {
 
+    chassis.moveToPose(20, 20, 90, 1000);
+
 }
 
 void BlueNeg() {
 
+    chassis.moveToPose(5, 5, 45, 1000);
+
 }
 
 void BluePos() {
+
+    chassis.moveToPose(15, 15, 30, 1000);
 
 }

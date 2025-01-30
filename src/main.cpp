@@ -34,7 +34,24 @@ void disabled() {}
  * This task will exit when the robot is enabled and autonomous or opcontrol
  * starts.
  */
-void competition_initialize() { screenInit(); }
+void competition_initialize() { screenInit(); 
+    int leftY = Controller.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y);
+    int rightY = Controller.get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_Y);
+    int leftX = Controller.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_X);
+    int rightX = Controller.get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_X);
+    
+    switch(controlStyle) {
+        case ControlType::ArcadeStyle:
+            chassis.arcade(leftY, rightX);
+        break;
+        case ControlType::TankStyle:
+            chassis.tank(leftY, rightY);
+        break;
+        case ControlType::CurvatureControl:
+            chassis.curvature(leftY, rightX);
+        break;
+    }
+}
 
 /**
  * Runs the user autonomous code. This function will be started in its own task
@@ -86,9 +103,25 @@ void opcontrol() {
   while (true) {
 
     // TODO: Get the correct configuration of the bots
+
+    // Just defined all of these so that we can switch control styles.
+    // TODO: Get working on inputs for the other specific controls, handling hook and what not.
     int leftY = Controller.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y);
     int rightY = Controller.get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_Y);
+    int leftX = Controller.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_X);
+    int rightX = Controller.get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_X);
 
+    switch(controlStyle) {
+        case ControlType::ArcadeStyle:
+            chassis.arcade(leftY, rightX);
+        break;
+        case ControlType::TankStyle:
+            chassis.tank(leftY, rightY);
+        break;
+        case ControlType::CurvatureControl:
+            chassis.curvature(leftY, rightX);
+        break;
+    }
     // get left y and right x positions
     // int leftY = controller.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y);
     // int leftX = controller.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_X);
@@ -97,22 +130,11 @@ void opcontrol() {
     // chassis.curvature(leftY, leftX);
 
 
-      printf("X: %f\n", chassis.getPose().x);
-      printf("Y: %f\n", chassis.getPose().y);
-      printf("Theta: %f\n", chassis.getPose().theta);
-
+      // printf("X: %f\n", chassis.getPose().x);
+      // printf("Y: %f\n", chassis.getPose().y);
+      // printf("Theta: %f\n", chassis.getPose().theta);
+      //
     chassis.tank(leftY, rightY);
-    pros::lcd::print(0, "%d %d %d",
-                     (pros::lcd::read_buttons() & LCD_BTN_LEFT) >> 2,
-                     (pros::lcd::read_buttons() & LCD_BTN_CENTER) >> 1,
-                     (pros::lcd::read_buttons() & LCD_BTN_RIGHT) >> 0);
-    int left = master.get_analog(ANALOG_LEFT_Y);
-    int right = master.get_analog(ANALOG_RIGHT_Y);
-
-    setDriveMotor();
-    setIntakeMotors();
-    // left_mtr = left;
-    // right_mtr = right;
 
     pros::delay(20);
   }
