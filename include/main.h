@@ -39,8 +39,8 @@
 /**
  * You should add more #includes here
  */
-//#include "okapi/api.hpp"
-//#include "pros/api_legacy.h"
+// #include "okapi/api.hpp"
+// #include "pros/api_legacy.h"
 
 /**
  * If you find doing pros::Motor() to be tedious and you'd prefer just to do
@@ -76,15 +76,17 @@ void opcontrol(void);
  * You can add C++-only headers here
  */
 
-#include "pros/apix.h"
+#include "pros/apix.h"  
 
- #include "subSystemHeaders/drive.hpp"
+#include "subSystemHeaders/auton.hpp"
+#include "subSystemHeaders/drive.hpp"
+#include "subSystemHeaders/globals.hpp"
+#include "subSystemHeaders/hook.hpp"
+#include "subSystemHeaders/intake.hpp"
+#include "subSystemHeaders/lift.hpp"
 #include "subSystemHeaders/screen.hpp"
- #include "subSystemHeaders/globals.hpp"
- #include "subSystemHeaders/hook.hpp"
- #include "subSystemHeaders/intake.hpp"
- #include "subSystemHeaders/lift.hpp"
-//#include <iostream>
+#include "lemlib/api.hpp"  // IWYU pragma: keep
+// #include <iostream>
 #endif
 
-#endif  // _PROS_MAIN_H_
+#endif // _PROS_MAIN_H_

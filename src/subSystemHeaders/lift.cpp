@@ -3,7 +3,7 @@
 
 
 void setConveyor(int button) {
-    ConGP = button;
+    // ConGP = button;
 }
 
 void setConveyorMotors() {

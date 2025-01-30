@@ -17,8 +17,8 @@ Think about QMK's way of handling RGB and other things in it's `config.h`, might
 ### General Program
 
 Work on getting the base of the program down, I'm assuming all of the other bots are going to be very similar, minus changing a few parameters to get it to work. This will help a lot with Auton and also everything to do with control, only issue is the size of the bots. That shouldn't matter with PROS and LemLib. 
-- [ ] AN ACTUAL DAMN VERSION CONTROL SYSTEM THAT IS SANE, Really annoying to run back and forth with a USB.
-- [ ] Work on porting all Auton code to CPP, finish getting the base done
+- [x] AN ACTUAL DAMN VERSION CONTROL SYSTEM THAT IS SANE, Really annoying to run back and forth with a USB.
+- [x] Work on porting all Auton code to CPP, finish getting the base done
     - [ ] Bot Setup
         - [x] Motor, Controller, and Driving ability (Somewhat at the moment, mostly implemented)
     - [ ] Competition Ready
@@ -31,17 +31,20 @@ Work on getting the base of the program down, I'm assuming all of the other bots
     - [ ] Regular Control
     <br>
     ^ Luckily we have access to a weird thing that allows the control to switch depending on flags, really nice for a couple of the people here.
-- [ ] Auton Switcher
+- [x] Auton Switcher
     - [ ] Auton for Pos Red
     - [ ] Auton for Neg Red
     - [ ] Auton for Pos Blue
     - [ ] Auton for Neg Blue
-    - [ ] Finish mockup of UI and implement it.
+    - [x] Finish mockup of UI and implement it.
+    - [ ] Finish styling UI
     <br>
     Again, basing this off of other people's code, there is a way to do something that allows for auton switching, I did start making a mockup of this such thing, but will finish it later. Both in terms of ideas, and the look of the UI for this Auton Switcher
-    - [ ] Finish designing the menu for auton switcher
-- Maybe decide on having the control be also on the main screen, maybe alongside the auton switcher, just in a sub menu?
-- [ALL BOTS] Maybe add some form of an encoder so we can track the position of the motors, so we can use Odometry?
+    - [x] Finish designing the menu for auton switcher
+
+ ~~- Maybe decide on having the control be also on the main screen, maybe alongside the auton switcher, just in a sub menu? ~~
+~~- [ALL BOTS] Maybe add some form of an encoder so we can track the position of the motors, so we can use Odometry? ~~
+^ Lemlib can track the position of the bot based on the motors location, very nice and what not. This isn't techinally need it, we just don't have it
 
 
 
