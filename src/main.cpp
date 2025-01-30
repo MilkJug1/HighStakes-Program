@@ -35,6 +35,7 @@ void disabled() {}
  * starts.
  */
 void competition_initialize() { screenInit(); 
+
     int leftY = Controller.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y);
     int rightY = Controller.get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_Y);
     int leftX = Controller.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_X);
@@ -69,15 +70,19 @@ void autonomous() {
   switch (auton) {
   case AutonType::RED_NEG:
     printf("Test for Red Neg\n");
+    RedNeg();
     break;
   case AutonType::RED_POS:
     printf("Test for Red Pos\n");
+        RedPos();
     break;
   case AutonType::BLUE_NEG:
     printf("test for Blue Neg\n");
+    BlueNeg();
     break;
   case AutonType::BLUE_POS:
     printf("Test for Blue Pos\n");
+            BluePos();
     break;
   }
 }
@@ -114,6 +119,7 @@ void opcontrol() {
     switch(controlStyle) {
         case ControlType::ArcadeStyle:
             chassis.arcade(leftY, rightX);
+
         break;
         case ControlType::TankStyle:
             chassis.tank(leftY, rightY);
@@ -134,7 +140,6 @@ void opcontrol() {
       // printf("Y: %f\n", chassis.getPose().y);
       // printf("Theta: %f\n", chassis.getPose().theta);
       //
-    chassis.tank(leftY, rightY);
 
     pros::delay(20);
   }
