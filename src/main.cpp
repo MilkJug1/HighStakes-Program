@@ -1,5 +1,6 @@
 #include "main.h"
 #include "lemlib/api.hpp"
+#include "pros/misc.h"
 
 /**
  * Runs initialization code. This occurs as soon as the program is started.
@@ -34,24 +35,25 @@ void disabled() {}
  * This task will exit when the robot is enabled and autonomous or opcontrol
  * starts.
  */
-void competition_initialize() { screenInit(); 
+void competition_initialize() {
+  screenInit();
 
-    int leftY = Controller.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y);
-    int rightY = Controller.get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_Y);
-    int leftX = Controller.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_X);
-    int rightX = Controller.get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_X);
-    
-    switch(controlStyle) {
-        case ControlType::ArcadeStyle:
-            chassis.arcade(leftY, rightX);
-        break;
-        case ControlType::TankStyle:
-            chassis.tank(leftY, rightY);
-        break;
-        case ControlType::CurvatureControl:
-            chassis.curvature(leftY, rightX);
-        break;
-    }
+  int leftY = Controller.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y);
+  int rightY = Controller.get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_Y);
+  int leftX = Controller.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_X);
+  int rightX = Controller.get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_X);
+
+  switch (controlStyle) {
+  case ControlType::ArcadeStyle:
+    chassis.arcade(leftY, rightX);
+    break;
+  case ControlType::TankStyle:
+    chassis.tank(leftY, rightY);
+    break;
+  case ControlType::CurvatureControl:
+    chassis.curvature(leftY, rightX);
+    break;
+  }
 }
 
 /**
@@ -74,7 +76,7 @@ void autonomous() {
     break;
   case AutonType::RED_POS:
     printf("Test for Red Pos\n");
-        RedPos();
+    RedPos();
     break;
   case AutonType::BLUE_NEG:
     printf("test for Blue Neg\n");
@@ -82,7 +84,7 @@ void autonomous() {
     break;
   case AutonType::BLUE_POS:
     printf("Test for Blue Pos\n");
-            BluePos();
+    BluePos();
     break;
   }
 }
@@ -110,23 +112,42 @@ void opcontrol() {
     // TODO: Get the correct configuration of the bots
 
     // Just defined all of these so that we can switch control styles.
-    // TODO: Get working on inputs for the other specific controls, handling hook and what not.
+    // TODO: Get working on inputs for the other specific controls, handling
+    // hook and what not.
     int leftY = Controller.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y);
     int rightY = Controller.get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_Y);
     int leftX = Controller.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_X);
     int rightX = Controller.get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_X);
 
-    switch(controlStyle) {
-        case ControlType::ArcadeStyle:
-            chassis.arcade(leftY, rightX);
+    switch (controlStyle) {
+    case ControlType::ArcadeStyle:
+      chassis.arcade(leftY, rightX);
 
-        break;
-        case ControlType::TankStyle:
-            chassis.tank(leftY, rightY);
-        break;
-        case ControlType::CurvatureControl:
-            chassis.curvature(leftY, rightX);
-        break;
+      break;
+    case ControlType::TankStyle:
+      chassis.tank(leftY, rightY);
+      break;
+    case ControlType::CurvatureControl:
+      chassis.curvature(leftY, rightX);
+      break;
+    }
+
+    if (Controller.get_digital(pros::E_CONTROLLER_DIGITAL_X)) {
+      Conveyor.move(127);
+      Intake.move(-127);
+    }
+
+    if (Controller.get_digital(pros::E_CONTROLLER_DIGITAL_B)) {
+      Conveyor.move(-127);
+      Intake.move(127);
+    }
+
+    if (Controller.get_digital(pros::E_CONTROLLER_DIGITAL_R1)) {
+            Hook.move_absolute(-100, 500);
+    }
+
+    if (Controller.get_digital(pros::E_CONTROLLER_DIGITAL_R2)) {
+      Hook.move(127);
     }
     // get left y and right x positions
     // int leftY = controller.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y);
@@ -135,11 +156,10 @@ void opcontrol() {
     // // move the robot
     // chassis.curvature(leftY, leftX);
 
-
-      // printf("X: %f\n", chassis.getPose().x);
-      // printf("Y: %f\n", chassis.getPose().y);
-      // printf("Theta: %f\n", chassis.getPose().theta);
-      //
+    // printf("X: %f\n", chassis.getPose().x);
+    // printf("Y: %f\n", chassis.getPose().y);
+    // printf("Theta: %f\n", chassis.getPose().theta);
+    //
 
     pros::delay(20);
   }

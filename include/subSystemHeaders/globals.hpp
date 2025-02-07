@@ -29,10 +29,10 @@ extern lemlib::Chassis chassis;
 extern pros::MotorGroup LeftMotor;
 extern pros::MotorGroup right_motor;
 
-//Hook
-extern pros::MotorGroup HookGrp;
-// Conveyor
-extern pros::MotorGroup Conveyor;
+extern pros::Motor Conveyor;
+extern pros::Motor Hook;
+extern pros::Motor Intake;
+
 
 extern pros::Controller Controller;
 

@@ -14,11 +14,26 @@ pros::Controller Controller(pros::E_CONTROLLER_MASTER);
 
 // pros::Motor LeftMotor(10, pros::MotorGearset::green);
 // pros::Motor right_motor(19);
+//
+/*
+ *  Levi's bot
+ *  2 Drive motors, 10, 20
+ *  1 motor for Conveyer, 19
+ *  1 motor for wheels in front
+ * 1 hook is 18
+ * Intake motor is 5
+ 
+ *
+ * */
 
 pros::MotorGroup
     LeftMotor({10}); // Even tho we have only 1 motor on each side, a 2
                      // drivetrain, i have to declare this as a motor group :/
-pros::MotorGroup right_motor({-19});
+pros::MotorGroup right_motor({-20});
+
+pros::Motor Conveyor(19);
+pros::Motor Intake(5);
+pros::Motor Hook(18);
 
 // TODO: Change Track width measurements
 lemlib::Drivetrain drivetrain(&LeftMotor, &right_motor, 10,
