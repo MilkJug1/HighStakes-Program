@@ -107,6 +107,11 @@ void opcontrol() {
 
   //TODO: Fix an issue with wood's bot, driving is weird, maybe switch left and right sticks?
   while (true) {
+    std::uint32_t now = pros::millis();
+    Hook.tare_position();
+    printf("Pos: %d\n", Hook.get_raw_position(&now)); 
+
+    Hook.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
 
     // TODO: Get the correct configuration of the bots
 
@@ -142,14 +147,43 @@ void opcontrol() {
 
     if (Controller.get_digital(pros::E_CONTROLLER_DIGITAL_R1)) {
         Hook.move_velocity(200);
+        // Hook.move_absolute(500, 100);
+        // while (!((Hook.get_position() < -265))) {
+        //   Hook.move(-25);
+        //   pros::delay(20);
+        //   chassis.arcade(rightX, leftY);
+        // }
+        // Hook.brake();
+
+        // Hook.move(-25);
+        // if(Hook.get_position() < 0) {
+        //   Hook.brake();
+        // }
     }
 
     if (Controller.get_digital(pros::E_CONTROLLER_DIGITAL_R2)) {
       Hook.move_velocity(-200);
+        // Hook.move_absolute(0, 100);
+
+
+        // while (!((Hook.get_position() < 0))) {
+        //     Hook.move(25);
+        //   chassis.arcade(rightX, leftY);
+        //     pros::delay(20);
+        // }
+
+        // Hook.move(25);
+        // if(Hook.get_position() < -200) {
+        //   Hook.brake();
+        // }
     }
 
     if(Controller.get_digital(pros::E_CONTROLLER_DIGITAL_Y)) {
         Intake.brake();
+    }
+
+    if(Controller.get_digital(pros::E_CONTROLLER_DIGITAL_DOWN)) {
+      RedPos();
     }
     // get left y and right x positions
     // int leftY = controller.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y);
@@ -158,9 +192,7 @@ void opcontrol() {
     // // move the robot
     // chassis.curvature(leftY, leftX);
 
-    // printf("X: %f\n", chassis.getPose().x);
-    // printf("Y: %f\n", chassis.getPose().y);
-    // printf("Theta: %f\n", chassis.getPose().theta);
+ 
     //
 
     pros::delay(20);

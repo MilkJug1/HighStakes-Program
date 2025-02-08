@@ -21,7 +21,7 @@ void RedPos() {
 
     Intake.move(127);
     
-    chassis.follow(redPos_txt, 2, 5);
+    chassis.follow(redPos_txt, 15, 2000);
 
 }
 
@@ -31,7 +31,8 @@ void RedNeg() {
 
     Intake.move(127);
 
-    chassis.follow(redNeg_txt, 2, 5);
+    // chassis.follow(redNeg_txt, 2, 5);
+    chassis.moveToPoint(20, 20, 2000);
 }
 
 void BlueNeg() {
@@ -40,7 +41,8 @@ void BlueNeg() {
 
   Intake.move(127);
 
-  chassis.follow(blueNeg_txt, 5, 2);
+//   chassis.follow(blueNeg_txt, 5, 2);
+    chassis.moveToPose(20, 20, 15, 2000);
 }
 
 void BluePos() {
@@ -49,5 +51,6 @@ void BluePos() {
 
     Intake.move(127);
 
-    chassis.follow(redNeg_txt, 2, 5);
+    // chassis.follow(redNeg_txt, 2, 5);
+    chassis.moveToPose(20, 20, , 2000);
 }
