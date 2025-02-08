@@ -22,18 +22,24 @@ pros::Controller Controller(pros::E_CONTROLLER_MASTER);
  *  1 motor for wheels in front
  * 1 hook is 18
  * Intake motor is 5
- 
+ * Wheel Dia = 4
+ * Wheel Base = 6.5in
+ * Wheel Width = 14in
  *
  * */
 
+// For now, change these values here below, because they handle each bot, just go and change them for each bot, We can do a similar thing with enums again to have it change based on a flag, screen type?
 pros::MotorGroup
     LeftMotor({10}); // Even tho we have only 1 motor on each side, a 2
                      // drivetrain, i have to declare this as a motor group :/
 pros::MotorGroup right_motor({-20});
 
-pros::Motor Conveyor(19);
-pros::Motor Intake(5);
+// pros::Motor Conveyor(19);
+// pros::Motor Intake(5);
 pros::Motor Hook(18);
+//
+//
+pros::MotorGroup Intake({-5, 19});
 
 // TODO: Change Track width measurements
 lemlib::Drivetrain drivetrain(&LeftMotor, &right_motor, 10,

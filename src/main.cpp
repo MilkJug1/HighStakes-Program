@@ -104,16 +104,14 @@ void autonomous() {
  */
 void opcontrol() {
   pros::Controller master(pros::E_CONTROLLER_MASTER);
-  // pros::Motor left_mtr(1);
-  // pros::Motor right_mtr(2);
-  //
+
+  //TODO: Fix an issue with wood's bot, driving is weird, maybe switch left and right sticks?
   while (true) {
 
     // TODO: Get the correct configuration of the bots
 
     // Just defined all of these so that we can switch control styles.
-    // TODO: Get working on inputs for the other specific controls, handling
-    // hook and what not.
+
     int leftY = Controller.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y);
     int rightY = Controller.get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_Y);
     int leftX = Controller.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_X);
@@ -133,21 +131,25 @@ void opcontrol() {
     }
 
     if (Controller.get_digital(pros::E_CONTROLLER_DIGITAL_X)) {
-      Conveyor.move(127);
-      Intake.move(-127);
-    }
-
-    if (Controller.get_digital(pros::E_CONTROLLER_DIGITAL_B)) {
-      Conveyor.move(-127);
+      // Conveyor.move(127);
       Intake.move(127);
     }
 
+    if (Controller.get_digital(pros::E_CONTROLLER_DIGITAL_B)) {
+      // Conveyor.move(-127);
+      Intake.move(-127);
+    }
+
     if (Controller.get_digital(pros::E_CONTROLLER_DIGITAL_R1)) {
-            Hook.move_absolute(-100, 500);
+        Hook.move_velocity(200);
     }
 
     if (Controller.get_digital(pros::E_CONTROLLER_DIGITAL_R2)) {
-      Hook.move(127);
+      Hook.move_velocity(-200);
+    }
+
+    if(Controller.get_digital(pros::E_CONTROLLER_DIGITAL_Y)) {
+        Intake.brake();
     }
     // get left y and right x positions
     // int leftY = controller.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y);

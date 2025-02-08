@@ -178,10 +178,6 @@ def autorun():
     dt.drive_for(r, 20, i)
     hook_open()  
     dt.drive_for(f, 5, i)
-    
-    
-    
-
     dt.drive_for(REVERSE, 6, INCHES, 100, PERCENT)
     # ConGB.spin_for(FORWARD, 5, TURNS) # Adjust if needed, random value
     dt.turn(330, DEGREES)#
@@ -213,7 +209,6 @@ debug = False
 ############
 
 if debug is True: 
-    # FIXME: BUTTON NOT WORKING WHEN PRESSING FOR DEBUG
     control.buttonL2.pressed(autoon)
     while True: 
         rc_control()
