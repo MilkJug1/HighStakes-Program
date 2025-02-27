@@ -137,46 +137,46 @@ void opcontrol() {
 
     if (Controller.get_digital(pros::E_CONTROLLER_DIGITAL_X)) {
       // Conveyor.move(127);
-      Intake.move(127);
+      Intake.move(96);
     }
 
     if (Controller.get_digital(pros::E_CONTROLLER_DIGITAL_B)) {
       // Conveyor.move(-127);
-      Intake.move(-127);
+      Intake.move(-96);
     }
 
-    if (Controller.get_digital(pros::E_CONTROLLER_DIGITAL_R1)) {
-        Hook.move_velocity(200);
-        // Hook.move_absolute(500, 100);
-        // while (!((Hook.get_position() < -265))) {
-        //   Hook.move(-25);
-        //   pros::delay(20);
-        //   chassis.arcade(rightX, leftY);
-        // }
-        // Hook.brake();
-
-        // Hook.move(-25);
-        // if(Hook.get_position() < 0) {
-        //   Hook.brake();
-        // }
+    if(Controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_R1))
+    {
+      Hook.move(100);
     }
 
-    if (Controller.get_digital(pros::E_CONTROLLER_DIGITAL_R2)) {
-      Hook.move_velocity(-200);
-        // Hook.move_absolute(0, 100);
-
-
-        // while (!((Hook.get_position() < 0))) {
-        //     Hook.move(25);
-        //   chassis.arcade(rightX, leftY);
-        //     pros::delay(20);
-        // }
-
-        // Hook.move(25);
-        // if(Hook.get_position() < -200) {
-        //   Hook.brake();
-        // }
+    if(Controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_R2)){
+      Hook.move(-100);
     }
+
+    // {
+    //   Hook.move_relative(10, 100);
+    // }
+    
+    // while(Controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_R2)){
+    //   Hook.move_relative(-10, 100);
+    // }
+    // if (Controller.get_digital(pros::E_CONTROLLER_DIGITAL_R1)) {
+    //     Hook.move_velocity(200);
+    //     // Hook.move_absolute(500, 100);
+    //     // while (!((Hook.get_position() < -265))) {
+    //     //   Hook.move(-25);
+    //     //   pros::delay(20);
+    //     //   chassis.arcade(rightX, leftY);
+    //     // }
+    //     // Hook.brake();
+
+    //     // Hook.move(-25);
+    //     // if(Hook.get_position() < 0) {
+    //     //   Hook.brake();
+    //     // }
+    // }
+
 
     if(Controller.get_digital(pros::E_CONTROLLER_DIGITAL_Y)) {
         Intake.brake();
@@ -184,6 +184,16 @@ void opcontrol() {
 
     if(Controller.get_digital(pros::E_CONTROLLER_DIGITAL_DOWN)) {
       RedPos();
+    }
+    if(Controller.get_digital(pros::E_CONTROLLER_DIGITAL_UP)) {
+      RedNeg();
+    }
+    if(Controller.get_digital(pros::E_CONTROLLER_DIGITAL_LEFT))
+    {
+      BlueNeg();
+    }
+    if(Controller.get_digital(pros::E_CONTROLLER_DIGITAL_RIGHT)) {
+      BluePos();
     }
     // get left y and right x positions
     // int leftY = controller.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y);

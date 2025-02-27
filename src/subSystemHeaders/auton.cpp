@@ -16,12 +16,16 @@ ASSET(blueNeg_txt);
 ASSET(bluePos_txt);
 ASSET(redNeg_txt);
 ASSET(redPos_txt);
+//ERROR: For some reason this is not working, prob because of no sensor
+
 void RedPos() {
     chassis.setPose(0,0, 0);
 
     Intake.move(127);
     
-    chassis.follow(redPos_txt, 15, 2000);
+    // chassis.follow(redPos_txt, 15, 2000);
+
+    chassis.moveToPoint(40, 40, 2000);
 
 }
 
@@ -52,5 +56,5 @@ void BluePos() {
     Intake.move(127);
 
     // chassis.follow(redNeg_txt, 2, 5);
-    chassis.moveToPose(20, 20, , 2000);
+    chassis.moveToPose(20, 20, 70, 2000);
 }
