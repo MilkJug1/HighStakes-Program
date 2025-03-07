@@ -137,12 +137,12 @@ void opcontrol() {
 
     if (Controller.get_digital(pros::E_CONTROLLER_DIGITAL_X)) {
       // Conveyor.move(127);
-      Intake.move(96);
+      Intake.move(114);
     }
 
     if (Controller.get_digital(pros::E_CONTROLLER_DIGITAL_B)) {
       // Conveyor.move(-127);
-      Intake.move(-96);
+      Intake.move(-114);
     }
 
     if(Controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_R1))

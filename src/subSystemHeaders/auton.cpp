@@ -23,9 +23,20 @@ void RedPos() {
 
     Intake.move(127);
     
-    // chassis.follow(redPos_txt, 15, 2000);
+    // chassis.follow(redPos_txt, 55, 2000);
 
-    chassis.moveToPoint(40, 40, 2000);
+    // chassis.moveToPose(40, 60, 55, 2000);
+
+    chassis.moveToPoint(95, 0, 2000);
+    chassis.moveToPose(0, 0, 180, 2000);
+    Hook.move(100);
+    chassis.moveToPoint(25, 10, 1500);
+
+    // chassis.moveToPose(40,40,180,2000);
+    // chassis.moveToPoint(-5, -5, 2000, {}, false);
+    // Hook.move(127);
+    // chassis.moveToPoint(-20, -20, 2000);
+    // chassis.moveToPose(0, 30, 20, 2000);
 
 }
 
