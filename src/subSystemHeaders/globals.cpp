@@ -33,18 +33,28 @@ pros::Controller Controller(pros::E_CONTROLLER_MASTER);
 // Woods Hook 14
 // Woods Intake 19
 
+// 1624Z bot conf
+// Motors 17, 18, 20 are intake
+// Drive motors are Front left 12, front right 11, back left 13, Back right 14
+// hook is pnematic A and B
+
+
 // For now, change these values here below, because they handle each bot, just go and change them for each bot, We can do a similar thing with enums again to have it change based on a flag, screen type?
 pros::MotorGroup
-    LeftMotor({20}); // Even tho we have only 1 motor on each side, a 2
+    LeftMotor({-13, -14}, pros::v5::MotorGears::green); // Even tho we have only 1 motor on each side, a 2
                      // drivetrain, i have to declare this as a motor group :/
-pros::MotorGroup right_motor({-10});
+pros::MotorGroup right_motor({-11, -12}, pros::v5::MotorGears::green);
 
 // pros::Motor Conveyor(19);
 // pros::Motor Intake(5);
-pros::Motor Hook(8);
+
+//NOTE: Do not forget to uncommet this for other bots
+pros::adi::Pneumatics HookR('a', false);
+pros::adi::Pneumatics HookL('b', false);
+
 
 //
-pros::MotorGroup Intake({-5, 19});
+pros::MotorGroup Intake({-17, 18, 20});
 
 // TODO: Change Track width measurements
 lemlib::Drivetrain drivetrain(&LeftMotor, &right_motor, 10,

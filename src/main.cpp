@@ -108,10 +108,10 @@ void opcontrol() {
   //TODO: Fix an issue with wood's bot, driving is weird, maybe switch left and right sticks?
   while (true) {
     std::uint32_t now = pros::millis();
-    Hook.tare_position();
-    printf("Pos: %d\n", Hook.get_raw_position(&now)); 
+    // Hook.tare_position();
+    // printf("Pos: %d\n", Hook.get_raw_position(&now)); 
 
-    Hook.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
+    // Hook.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
 
     // TODO: Get the correct configuration of the bots
 
@@ -124,7 +124,9 @@ void opcontrol() {
 
     switch (controlStyle) {
     case ControlType::ArcadeStyle:
-      chassis.arcade(leftY, rightX);
+    // flip for marks bot
+      // chassis.arcade(leftY, rightX);
+      chassis.arcade(rightX, leftY);
 
       break;
     case ControlType::TankStyle:
@@ -147,11 +149,19 @@ void opcontrol() {
 
     if(Controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_R1))
     {
-      Hook.move(100);
+      // Hook.move(100);
+      HookR.extend();
+      HookL.retract();
     }
 
     if(Controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_R2)){
-      Hook.move(-100);
+      // Hook.move(-100);
+      HookL.extend();
+      HookR.retract();
+    }
+
+    if(Controller.get_digital(pros::E_CONTROLLER_DIGITAL_A)){ 
+      Intake.brake();
     }
 
     // {

@@ -21,16 +21,16 @@ ASSET(redPos_txt);
 void RedPos() {
     chassis.setPose(0,0, 0);
 
-    Intake.move(127);
+    // Hook.move(100);
     
     // chassis.follow(redPos_txt, 55, 2000);
 
     // chassis.moveToPose(40, 60, 55, 2000);
 
-    chassis.moveToPoint(95, 0, 2000);
-    chassis.moveToPose(0, 0, 180, 2000);
-    Hook.move(100);
-    chassis.moveToPoint(25, 10, 1500);
+    chassis.moveToPoint(25, 25, 2000);
+    chassis.moveToPose(0, 0, 360, 2000);
+    // Hook.move(-100);
+    chassis.moveToPoint(-25, -10, 1500, {.forwards = false});
 
     // chassis.moveToPose(40,40,180,2000);
     // chassis.moveToPoint(-5, -5, 2000, {}, false);
@@ -44,28 +44,26 @@ void RedNeg() {
 
     chassis.setPose(0,0, 0);
 
-    Intake.move(127);
 
     // chassis.follow(redNeg_txt, 2, 5);
-    chassis.moveToPoint(20, 20, 2000);
+    chassis.moveToPoint(4, 25, 2000);
 }
 
 void BlueNeg() {
 
   chassis.setPose(0, 0, 0);
 
-  Intake.move(127);
+  chassis.moveToPoint(5.6, 26, 2000);
 
 //   chassis.follow(blueNeg_txt, 5, 2);
-    chassis.moveToPose(20, 20, 15, 2000);
 }
 
 void BluePos() {
 
     chassis.setPose(0,0, 0);
 
-    Intake.move(127);
 
     // chassis.follow(redNeg_txt, 2, 5);
-    chassis.moveToPose(20, 20, 70, 2000);
+    chassis.moveToPose(0.76, 25.975, 180, 2000);
+    chassis.moveToPose(0, 10, 0 , 2000);
 }

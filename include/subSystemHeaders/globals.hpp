@@ -30,7 +30,9 @@ extern pros::MotorGroup LeftMotor;
 extern pros::MotorGroup right_motor;
 
 // extern pros::Motor Conveyor;
-extern pros::Motor Hook;
+// extern pros::Motor Hook;
+extern pros::adi::Pneumatics HookR;
+extern pros::adi::Pneumatics HookL;
 // extern pros::Motor Intake;
 
 extern pros::MotorGroup Intake;

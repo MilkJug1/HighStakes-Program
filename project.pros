@@ -300,7 +300,7 @@
     "upload_options": {
       "description": "Program for the 1624 teams.",
       "icon": "pizza",
-      "slot": 2
+      "slot": 3
     },
     "use_early_access": false
   }
